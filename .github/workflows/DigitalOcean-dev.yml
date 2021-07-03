@@ -44,9 +44,16 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.K8S_CONFIG }}
-      - name: Deploy to Kubernetes cluster
+      - name: Deploy Mongo DB to kuberenetes on DigitalOcean
         uses: Azure/k8s-deploy@v1
         with:
           manifests: |
             k8s/mongo/mongo-deployment.yaml
             k8s/mongo/mongo-service.yaml
+      - name: Deploy WEB to kuberenetes on DigitalOcean
+        uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            k8s/web/web-deployment.yaml
+            k8s/web/web-service.yaml
+          images: ${{ secrets.DOCKER_USERNAME }}/rotten-potatoes:${{ github.run_number }}
