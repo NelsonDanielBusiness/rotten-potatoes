@@ -9,4 +9,4 @@ spec:
     - port : 80
       targetPort: 5000 #porta do container
       nodePort: 30000 #porta do node
-  type: NodePort
+  type: LoadBalancer
